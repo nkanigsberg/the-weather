@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import axios from "axios";
+// import axios from "axios";
 
-import { weatherEndpoint, weatherKey } from './openWeather';
-import { locationEndpoint, locationKey } from './locationIq';
+import openWeather from './API/openWeather';
+import { reverseGeo, forwardGeo } from './API/locationIq';
 
+import WeatherIcon from './Components/WeatherIcon';
+// import SearchBar from './Components/SearchBar';
 
-
-// const tempLat = 33.441792;
-// const tempLon = -94.037689;
+import Header from './Components/Header';
 
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-			coords: {
-				lat: null,
-				lon: null,
-			},
+			lat: 0,
+			lon: 0,
+			location: '',
       weather: {},
-      city: "",
-    };
+			city: "",
+			province: "",
+			country: "",
+			weatherLoading: true,
+			locationLoading: true,
+			units: "metric",
+		};
   }
 
   componentDidMount() {
@@ -30,17 +34,22 @@ class App extends Component {
   }
 
   // get location data for user's device
-  getLocation() {
+  getLocation = (e = null) => {
+		if (e) e.preventDefault();
+
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
+        // console.log(position);
 
-        this.setState({
-          // coords.lat: 1,
-				});
-				
-				this.getCity(position.coords);
-				this.getWeather(position.coords);
+				this.setState({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+
+				const {lat, lon, units} = this.state;
+
+				this.getCity(lat, lon);
+				this.getWeather(lat, lon, units);
 
       });
     } else {
@@ -48,59 +57,108 @@ class App extends Component {
     }
   }
 
-  // get city name from coordinates
-  getCity({ latitude, longitude }) {
-    console.log(latitude);
-    axios({
-      method: "GET",
-      url: locationEndpoint,
-      dataResponse: "json",
-      params: {
-        format: "json",
-        key: locationKey,
-        lat: latitude,
-        lon: longitude,
-      },
-    }).then((result) => {
-			console.log(result.data.address.city);
+  // get city name from locationIQ API
+  getCity(lat, lon) {
+		reverseGeo(lat, lon).then(result => {
+			console.log(result.data.address);
       this.setState({
-        city: result.data.address.city,
+				city: result.data.address.city,
+				province: result.data.address.state,
+				country: result.data.address.country,
+				locationLoading: false,
       });
     });
   }
 
-	// get weather from API
-  getWeather({ latitude, longitude }) {
-    axios({
-      method: "GET",
-      url: weatherEndpoint,
-      dataResponse: "json",
-      params: {
-				appid: weatherKey,
-				units: "metric",
-        lat: latitude,
-        lon: longitude,
-      },
-    }).then((result) => {
+	// get weather from openWeather API
+  getWeather(lat, lon, units) {
+		openWeather(lat, lon, units).then(result => {
       console.log(result.data);
       // return result.data;
      	this.setState({
 				 weather: result.data,
-			 })
+				 weatherLoading: false,
+			});
     });
-  }
+	}
+	
+	/**
+	 * Search for coordinates from input location
+	 * @param {event} e 
+	 */
+	searchLocation = e => {
+		e.preventDefault();
+		console.log("location search");
+
+		if (this.state.location) {
+      forwardGeo(this.state.location).then((result) => {
+        const location = result.data[0];
+				console.log(location);
+				
+				this.setState({
+					lat: location.lat,
+					lon: location.lon,
+        });
+
+				const { lat, lon, units} = this.state;
+
+				this.getCity(lat, lon);
+				this.getWeather(lat, lon, units);
+
+			});
+		}
+	}
+
+	/**
+	 * Update the location state on change of input
+	 */
+	updateLocationState = e => {
+		this.setState({
+      location: e.target.value,
+    });
+	}
+
+
+	updateUnits = e => {
+		console.log(e.target.value);
+		this.setState({
+			units: e.target.value,
+		}, () => { //callback function to guarantee execute AFTER state change
+			const { lat, lon, units } = this.state;
+			// console.log(units);
+
+			this.getWeather(lat, lon, units);
+		})
+	}
+
 
   render() {
+		console.log('render');
+		const { weather, weatherLoading, locationLoading, city, province, country, units } = this.state;
+
     return (
       <div className="App">
-        <h1>Weather App</h1>
-        <h2>Your Location: {this.state.city}</h2>
-        <h2>
-          Currrent temperature:{" "}
-          {this.state.weather.current
-            ? this.state.weather.current.temp
-            : null}{" "}
-        </h2>
+        <Header
+          getLocation={this.getLocation}
+          submit={this.searchLocation}
+					change={this.updateLocationState}
+					updateUnits={this.updateUnits}
+        />
+
+        {/* display main content only after loaded from API */}
+        {weatherLoading || locationLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <h2>{`${city ? `${city}, ` : ""}${province}, ${country}`}</h2>
+						<h3>{weather.current.temp} {units === 'metric' ? '°C' : units === 'imperial' ? '°F' : 'K'}</h3>
+
+            <WeatherIcon
+              type={weather.current.weather[0].icon}
+              description={weather.current.weather[0].description}
+            />
+          </div>
+        )}
       </div>
     );
   }
