@@ -10,6 +10,7 @@ import WeatherIcon from './Components/WeatherIcon';
 // import SearchBar from './Components/SearchBar';
 
 import Header from './Components/Header';
+import WeekForecast from './Components/WeekForecast';
 
 
 class App extends Component {
@@ -138,27 +139,40 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header
+
+				<Header
           getLocation={this.getLocation}
           submit={this.searchLocation}
-					change={this.updateLocationState}
-					updateUnits={this.updateUnits}
+          change={this.updateLocationState}
+          updateUnits={this.updateUnits}
         />
 
-        {/* display main content only after loaded from API */}
-        {weatherLoading || locationLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <div>
-            <h2>{`${city ? `${city}, ` : ""}${province}, ${country}`}</h2>
-						<h3>{weather.current.temp} {units === 'metric' ? '°C' : units === 'imperial' ? '°F' : 'K'}</h3>
+        <main>
+          {/* display main content only after loaded from API */}
+          {weatherLoading || locationLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <div>
+              <h2>{`${city ? `${city}, ` : ""}${province}, ${country}`}</h2>
+              <h3>
+                {weather.current.temp}
+                {units === "metric" ? "°C" : units === "imperial" ? "°F" : "K"}
+              </h3>
 
-            <WeatherIcon
-              type={weather.current.weather[0].icon}
-              description={weather.current.weather[0].description}
-            />
-          </div>
-        )}
+              <WeatherIcon
+                type={weather.current.weather[0].icon}
+                description={weather.current.weather[0].description}
+              />
+
+              <p>
+                Feels like: {weather.current.feels_like}
+                {units === "metric" ? "°C" : units === "imperial" ? "°F" : "K"}
+              </p>
+
+              <WeekForecast weather={weather} />
+            </div>
+          )}
+        </main>
       </div>
     );
   }

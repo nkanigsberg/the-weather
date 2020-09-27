@@ -21,7 +21,7 @@ export default class Header extends Component {
 	
 	render() {
 		return (
-      <div>
+      <header>
         <h1>Weather App</h1>
 
         <Units updateUnits={this.updateUnits} />
@@ -33,7 +33,7 @@ export default class Header extends Component {
           id="search-location"
           placeholder="Enter Location"
         />
-      </div>
+      </header>
     );
 	}
 }
