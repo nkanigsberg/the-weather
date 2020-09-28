@@ -1,32 +1,11 @@
-.today {
-	display: flex;
-	width: 40%;
-	margin: 0 auto;
-
-	padding: 3rem 0;
-}
-
 .App {
 	min-height: 100vh;
 	position: relative;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+main {
+	padding: 4rem 0;
+}
 
 
 

@@ -77,12 +77,14 @@ class App extends Component {
 
 	// get weather from openWeather API
   getWeather(lat, lon, units) {
+
 		openWeather(lat, lon, units).then(result => {
       // console.log(result.data);
       // return result.data;
      	this.setState({
 				 weather: result.data,
 				 weatherLoading: false,
+				 units: units,
 			});
     });
 	}
@@ -124,17 +126,25 @@ class App extends Component {
 	}
 
 
-	updateUnits = e => {
-		// console.log(e.target.value);
-		this.setState({
-			units: e.target.value,
-		}, () => { //callback function to guarantee execute AFTER state change
-			const { lat, lon, units } = this.state;
-			// console.log(units);
+	// updateUnits = e => {
+	// 	// console.log(e.target.value);
+	// 	this.setState({
+	// 		units: e.target.value,
+	// 	}, () => { //callback function to guarantee execute AFTER state change
+	// 		const { lat, lon, units } = this.state;
+	// 		// console.log(units);
 
-			this.getWeather(lat, lon, units);
-		})
+	// 		this.getWeather(lat, lon, units);
+	// 	})
+	// }
+
+	updateUnits = e => {
+		const { lat, lon, units } = this.state;
+			// console.log(units);
+			// units: e.target.value,
+		this.getWeather(lat, lon, e.target.value);
 	}
+	
 
 
   render() {
@@ -158,7 +168,7 @@ class App extends Component {
 							<p>Loading...</p>
 						) : (
 							<>
-							
+
 								<CurrentWeather
 									city={city}
 									province={province}
@@ -168,7 +178,8 @@ class App extends Component {
 								/>
 
 								<WeekForecast 
-									weather={weather} 
+									weather={weather}
+									units={units}
 								/>
 
 							</>

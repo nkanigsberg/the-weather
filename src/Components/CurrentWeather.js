@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react';
 
-import WeatherIcon from './WeatherIcon'
+import WeatherIcon from './WeatherIcon';
+import Temperature from './Temperature';
+
+import '../styles/CurrentWeather.css';
 
 /**
  * The current weather
@@ -10,22 +13,24 @@ export default function CurrentWeather(props) {
 	const {city, province, country, weather, units } = props;
 
 	return (
-		<div className="currentWeather">
-			<h2>{`${city ? `${city}, ` : ""}${province}, ${country}`}</h2>
-			<h3>
-				{weather.current.temp}
-				{units === "metric" ? "°C" : units === "imperial" ? "°F" : "K"}
-			</h3>
+    <div className="currentWeather-container">
+      <h2>{`${city ? `${city}, ` : ""}${province}, ${country}`}</h2>
+      <p>{weather.current.weather[0].description}</p>
+      <div className="currentWeather">
+        <h3>
+          <Temperature temp={weather.current.temp} units={units} />
+        </h3>
 
-			<WeatherIcon
-				type={weather.current.weather[0].icon}
-				description={weather.current.weather[0].description}
-			/>
+        <WeatherIcon
+          type={weather.current.weather[0].icon}
+          description={weather.current.weather[0].description}
+        />
 
-			<p>
-				Feels like: {weather.current.feels_like}
-				{units === "metric" ? "°C" : units === "imperial" ? "°F" : "K"}
-			</p>
-		</div>
-	);
+        <p>
+          Feels like:{" "}
+          <Temperature temp={weather.current.feels_like} units={units} />
+        </p>
+      </div>
+    </div>
+  );
 }

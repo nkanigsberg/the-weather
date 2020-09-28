@@ -1,0 +1,13 @@
+.currentWeather-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.currentWeather {
+	display: flex;
+	justify-content: center;
+
+	padding: 3rem 0;
+}
+
