@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bf18c9668fb5b15e4253bee8beddcafd",
+    "revision": "772d8e8009100db2cf694eff644517c4",
     "url": "/nathanKanigsbergProject5/index.html"
   },
   {
-    "revision": "3894a8b4b0c3272da259",
-    "url": "/nathanKanigsbergProject5/static/css/main.33e90102.chunk.css"
+    "revision": "96a36d1fc0f08e53b44a",
+    "url": "/nathanKanigsbergProject5/static/css/main.18997bfe.chunk.css"
   },
   {
     "revision": "a5ed57c86a8f51603b54",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/nathanKanigsbergProject5/static/js/2.1b686a6e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3894a8b4b0c3272da259",
-    "url": "/nathanKanigsbergProject5/static/js/main.e6ea5009.chunk.js"
+    "revision": "96a36d1fc0f08e53b44a",
+    "url": "/nathanKanigsbergProject5/static/js/main.4554ec64.chunk.js"
   },
   {
     "revision": "29a2dad004b0c0b60f2d",
