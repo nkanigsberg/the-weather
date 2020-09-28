@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/fonts.css';
+import './styles/App.css';
+
 
 // import axios from "axios";
 
@@ -10,7 +12,9 @@ import WeatherIcon from './Components/WeatherIcon';
 // import SearchBar from './Components/SearchBar';
 
 import Header from './Components/Header';
+import CurrentWeather from './Components/CurrentWeather';
 import WeekForecast from './Components/WeekForecast';
+import Footer from './Components/Footer';
 
 
 class App extends Component {
@@ -61,7 +65,7 @@ class App extends Component {
   // get city name from locationIQ API
   getCity(lat, lon) {
 		reverseGeo(lat, lon).then(result => {
-			console.log(result.data.address);
+			// console.log(result.data.address);
       this.setState({
 				city: result.data.address.city,
 				province: result.data.address.state,
@@ -74,7 +78,7 @@ class App extends Component {
 	// get weather from openWeather API
   getWeather(lat, lon, units) {
 		openWeather(lat, lon, units).then(result => {
-      console.log(result.data);
+      // console.log(result.data);
       // return result.data;
      	this.setState({
 				 weather: result.data,
@@ -82,7 +86,7 @@ class App extends Component {
 			});
     });
 	}
-	
+
 	/**
 	 * Search for coordinates from input location
 	 * @param {event} e 
@@ -94,7 +98,7 @@ class App extends Component {
 		if (this.state.location) {
       forwardGeo(this.state.location).then((result) => {
         const location = result.data[0];
-				console.log(location);
+				// console.log(location);
 				
 				this.setState({
 					lat: location.lat,
@@ -121,7 +125,7 @@ class App extends Component {
 
 
 	updateUnits = e => {
-		console.log(e.target.value);
+		// console.log(e.target.value);
 		this.setState({
 			units: e.target.value,
 		}, () => { //callback function to guarantee execute AFTER state change
@@ -134,7 +138,7 @@ class App extends Component {
 
 
   render() {
-		console.log('render');
+		// console.log('render');
 		const { weather, weatherLoading, locationLoading, city, province, country, units } = this.state;
 
     return (
@@ -148,31 +152,32 @@ class App extends Component {
         />
 
         <main>
-          {/* display main content only after loaded from API */}
-          {weatherLoading || locationLoading ? (
-            <p>Loading...</p>
-          ) : (
-            <div>
-              <h2>{`${city ? `${city}, ` : ""}${province}, ${country}`}</h2>
-              <h3>
-                {weather.current.temp}
-                {units === "metric" ? "°C" : units === "imperial" ? "°F" : "K"}
-              </h3>
+          <div className="wrapper">
+						{/* display main content only after loaded from API */}
+						{weatherLoading || locationLoading ? (
+							<p>Loading...</p>
+						) : (
+							<>
+							
+								<CurrentWeather
+									city={city}
+									province={province}
+									country={country}
+									weather={weather}
+									units={units}
+								/>
 
-              <WeatherIcon
-                type={weather.current.weather[0].icon}
-                description={weather.current.weather[0].description}
-              />
+								<WeekForecast 
+									weather={weather} 
+								/>
 
-              <p>
-                Feels like: {weather.current.feels_like}
-                {units === "metric" ? "°C" : units === "imperial" ? "°F" : "K"}
-              </p>
-
-              <WeekForecast weather={weather} />
-            </div>
-          )}
+							</>
+						)}
+					</div>
         </main>
+
+				<Footer />
+
       </div>
     );
   }

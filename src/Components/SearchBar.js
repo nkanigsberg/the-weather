@@ -3,13 +3,14 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearchLocation, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
-
+/**
+ * The search bar for looking up new locations
+ * @param {object} props 
+ */
 export default function SearchBar(props) {
 
-	// console.log(props);
-
 	return (
-    <form action="submit">
+    <form action="submit" className="searchBar">
       <label htmlFor={props.id}>Search Location </label>
       <input
         onChange={props.change}

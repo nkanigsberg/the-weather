@@ -1,0 +1,11 @@
+footer {
+	background-color: #4b545d;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.footer-container {
+	padding: 2rem 0;
+	color: white;
+}

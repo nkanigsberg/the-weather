@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import SearchBar from './SearchBar'
 import Units from './Units'
 
+import '../styles/Header.css'
+
 // import App from '../App';
 
 export default class Header extends Component {
@@ -22,17 +24,23 @@ export default class Header extends Component {
 	render() {
 		return (
       <header>
-        <h1>Weather App</h1>
-
-        <Units updateUnits={this.updateUnits} />
-
-        <SearchBar
-          getLocation={this.getLocation}
-          submit={this.submit}
-          change={this.change}
-          id="search-location"
-          placeholder="Enter Location"
-        />
+        <div className="wrapper">
+					<div className="header-container">
+						<h1>Weather App</h1>
+						
+						<div className="right">
+							<Units updateUnits={this.updateUnits} />
+							
+							<SearchBar
+								getLocation={this.getLocation}
+								submit={this.submit}
+								change={this.change}
+								id="search-location"
+								placeholder="Enter Location"
+							/>
+						</div>
+					</div>
+				</div>
       </header>
     );
 	}
