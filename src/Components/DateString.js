@@ -3,11 +3,11 @@ import React from 'react'
 /**
  * Formatted date
  */
-export default function Date(props) {
+export default function DateString(props) {
 	
 	const { time } = props;
 
-	console.log(time);
+	// console.log(time);
 
 
 	let string = time;
@@ -15,5 +15,5 @@ export default function Date(props) {
 
 	string = string.substring(0, lastIndex);
 
-	return {string};
+	return <span>{string}</span>;
 }

@@ -14,6 +14,7 @@ import WeatherIcon from './Components/WeatherIcon';
 import Header from './Components/Header';
 import CurrentWeather from './Components/CurrentWeather';
 import WeekForecast from './Components/WeekForecast';
+import HourlyForecast from './Components/HourlyForecast';
 import Footer from './Components/Footer';
 
 
@@ -178,7 +179,12 @@ class App extends Component {
 								/>
 
 								<WeekForecast 
-									weather={weather}
+									daily={weather.daily}
+									units={units}
+								/>
+
+								<HourlyForecast 
+									hourly={weather.hourly}
 									units={units}
 								/>
 
