@@ -1,0 +1,26 @@
+
+/* leaflet */
+	body {
+			margin: 0;
+	}
+	#map {
+			width: 180px;
+			height: 180px;
+			background-color:transparent;
+			display: none;
+	}
+	#search-box {
+			padding-left: 20px;
+			padding-top: 20px;
+			width: 800px;
+			height: 100px;
+	}
+	#result {
+			padding-left: 20px;
+			padding-top: 20px;
+			width: 800px;
+			height: 100px;
+	}
+	.leaflet-locationiq-results{
+			padding-top: 45px;
+	}

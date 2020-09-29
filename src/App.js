@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './styles/fonts.css';
 import './styles/App.css';
 
-
 // import axios from "axios";
 
 import openWeather from './API/openWeather';
@@ -17,22 +16,24 @@ import WeekForecast from './Components/WeekForecast';
 import HourlyForecast from './Components/HourlyForecast';
 import Footer from './Components/Footer';
 
+// import MapComponent from './Components/MapComponent';
+
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-			lat: 0,
-			lon: 0,
-			location: '',
+      lat: 0,
+      lon: 0,
+      location: "",
       weather: {},
-			city: "",
-			province: "",
-			country: "",
-			weatherLoading: true,
-			locationLoading: true,
-			units: "metric",
-		};
+      city: "",
+      province: "",
+      country: "",
+      weatherLoading: true,
+      locationLoading: true,
+      units: "metric",
+    };
   }
 
   componentDidMount() {
@@ -149,13 +150,21 @@ class App extends Component {
 
 
   render() {
-		// console.log('render');
-		const { weather, weatherLoading, locationLoading, city, province, country, units } = this.state;
+    // console.log('render');
+    const {
+      weather,
+      weatherLoading,
+      locationLoading,
+      city,
+      province,
+      country,
+      units,
+    } = this.state;
+
 
     return (
       <div className="App">
-
-				<Header
+        <Header
           getLocation={this.getLocation}
           submit={this.searchLocation}
           change={this.updateLocationState}
@@ -164,37 +173,36 @@ class App extends Component {
 
         <main>
           <div className="wrapper">
-						{/* display main content only after loaded from API */}
-						{weatherLoading || locationLoading ? (
-							<p>Loading...</p>
-						) : (
-							<>
+            <div class="main-container">
 
-								<CurrentWeather
-									city={city}
-									province={province}
-									country={country}
-									weather={weather}
-									units={units}
-								/>
+							{/* <MapComponent /> */}
 
-								<WeekForecast 
-									daily={weather.daily}
-									units={units}
-								/>
+              <div class="main-left">
+                {/* display main content only after loaded from API */}
+                {weatherLoading || locationLoading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <>
+                    <CurrentWeather
+                      city={city}
+                      province={province}
+                      country={country}
+                      weather={weather}
+                      units={units}
+                    />
 
-								<HourlyForecast 
-									hourly={weather.hourly}
-									units={units}
-								/>
+                    <WeekForecast daily={weather.daily} units={units} />
 
-							</>
-						)}
-					</div>
+                    <HourlyForecast hourly={weather.hourly} units={units} />
+                  </>
+                )}
+              </div>
+              <div className="main-right"></div>
+            </div>
+          </div>
         </main>
 
-				<Footer />
-
+        <Footer />
       </div>
     );
   }

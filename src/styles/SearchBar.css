@@ -1,0 +1,15 @@
+
+.searchBar input {
+	font-size: 2rem;
+}
+
+.searchBar button {
+	font-size: 2rem;
+
+	padding: 0.5rem;
+}
+
+.searchBar button:hover,
+.searchBar button:focus {
+
+}

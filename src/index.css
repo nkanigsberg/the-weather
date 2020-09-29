@@ -87,3 +87,6 @@ code {
 body {
 	font-family: 'Arimo', sans-serif;
 }
+
+
+@import url('https://unpkg.com/leaflet@1.7.1/dist/leaflet.css');

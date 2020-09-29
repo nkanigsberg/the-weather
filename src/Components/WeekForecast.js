@@ -11,7 +11,7 @@ export default function WeekForecast(props) {
 	const { daily, units } = props;
 
 	return (
-		<div className="forecast">
+		<div className="forecast-week-container">
 			<h2>Weekly Forecast</h2>
 
 			<div className="forecast-week">
@@ -23,18 +23,20 @@ export default function WeekForecast(props) {
 
 						return (
               <div className="forecast-day">
-                <p><DateString time={time.toDateString()} /></p>
-                
-								<WeatherIcon
+                <p>
+                  <DateString time={time.toDateString()} />
+                </p>
+
+                <WeatherIcon
                   type={day.weather[0].icon}
                   description={day.weather[0].description}
                 />
 
-								<p>{day.weather[0].description}</p>
+                <p>{day.weather[0].description}</p>
 
-                <p>H: <Temperature temp={day.temp.max} units={units} /></p>
-                <p>L: <Temperature temp={day.temp.min} units={units} /></p>
-
+                <p>
+                  <Temperature temp={day.temp.max} units={''} /> / <Temperature temp={day.temp.min} units={units} />
+                </p>
               </div>
             );
 					}

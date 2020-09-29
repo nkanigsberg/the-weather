@@ -11,3 +11,11 @@
 	padding: 3rem 0;
 }
 
+.currentWeather-right {
+	display: flex;
+	flex-direction: column;
+}
+
+.description {
+	text-transform: capitalize;
+}

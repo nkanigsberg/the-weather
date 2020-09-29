@@ -10,7 +10,7 @@ export default function Temperature(props) {
 	return (
     <span>
       {temp.toFixed(1)}
-      {units === "metric" ? "°C" : units === "imperial" ? "°F" : "K"}
+      {!units ? '' : units === "metric" ? "°C" : units === "imperial" ? "°F" : "K"}
     </span>
   );
 }

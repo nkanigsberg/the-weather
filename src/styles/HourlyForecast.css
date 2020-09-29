@@ -1,0 +1,23 @@
+.forecast-hourly-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding: 3rem 0;
+	margin: 0 auto;
+
+	max-width: 70%;
+}
+
+.forecast-hourly {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: 1fr;
+
+	padding-top: 1rem;
+}
+
+.forecast-hour {
+	padding: 0.5rem;
+	text-align: center;
+}

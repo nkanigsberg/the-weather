@@ -28,7 +28,7 @@ export default class Header extends Component {
 					<div className="header-container">
 						<h1>Weather App</h1>
 						
-						<div className="right">
+						<div className="header-right">
 							<Units updateUnits={this.updateUnits} />
 							
 							<SearchBar
