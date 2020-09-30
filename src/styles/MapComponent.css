@@ -3,11 +3,11 @@
 	body {
 			margin: 0;
 	}
-	#map {
-			width: 180px;
-			height: 180px;
+	.leaflet-container {
+			width: 40rem;
+			height: 30rem;
 			background-color:transparent;
-			display: none;
+			/* display: none; */
 	}
 	#search-box {
 			padding-left: 20px;

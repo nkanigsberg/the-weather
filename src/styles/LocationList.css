@@ -1,3 +1,37 @@
 .LocationList {
 	border: 1px solid black;
 }
+
+
+.LocationList-remove {
+	padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
+
+.LocationList h3 {
+	text-align: center;
+	padding: 1rem;
+}
+
+.LocationList-loc {
+	/* border: 1px solid grey; */
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 1rem;
+}
+
+.LocationList p {
+	text-align: center;
+	padding: 1rem;
+}
+
+.LocationList-loc button {
+	text-align: left;
+}
+
+.LocationList-loc:nth-child(odd) {
+	background-color: #e9f3ff;
+}

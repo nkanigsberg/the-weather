@@ -4,6 +4,7 @@ import WeatherIcon from './WeatherIcon';
 import Temperature from './Temperature';
 import HourString from './HourString'
 import DateString from './DateString'
+import Location from './Location'
 
 import '../styles/CurrentWeather.css';
 
@@ -19,7 +20,13 @@ export default function CurrentWeather(props) {
 
 	return (
     <div className="currentWeather-container">
-      <h2>{`${city ? `${city}, ` : ""}${province}, ${country}`}</h2>
+      <h2>
+        <Location
+					city={city}
+					province={province}
+					country={country}
+				/>
+      </h2>
       <p>{time.toDateString()}</p>
 
       <div className="currentWeather">
@@ -31,15 +38,15 @@ export default function CurrentWeather(props) {
         />
 
         <div className="currentWeather-right">
-					<h3>
-						<Temperature temp={weather.current.temp} units={units} />
-					</h3>
-	
-					<p>
-						Feels like:{" "}
-						<Temperature temp={weather.current.feels_like} units={units} />
-					</p>
-				</div>
+          <h3>
+            <Temperature temp={weather.current.temp} units={units} />
+          </h3>
+
+          <p>
+            Feels like:{" "}
+            <Temperature temp={weather.current.feels_like} units={units} />
+          </p>
+        </div>
       </div>
     </div>
   );

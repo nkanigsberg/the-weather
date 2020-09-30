@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import L from "leaflet";
-import { Map, TileLayer, Marker, Popup } from "leaflet";
 
-import '../styles/Map.css'
+import { render } from "react-dom";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+
+import '../styles/MapComponent.css'
 
 export default class MapComponent extends Component {
 	constructor() {
@@ -55,20 +56,47 @@ export default class MapComponent extends Component {
 
 	render() {
 
-		const position = [this.state.lat, this.state.lng];
 
+		const position = [this.state.lat, this.state.lng];
 		return (
-      <Map center={position} zoom={this.state.zoom}>
-        <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tile.openweathermap.org/map/temp_new/2/1/3.png?appid=4de58afe7c0aa78a01498b122c46d7e2"
-        />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </Map>
+			<Map center={position} zoom={this.state.zoom}>
+				<TileLayer
+					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+					url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+				/>
+				<Marker position={position}>
+					<Popup>
+						A pretty CSS3 popup. <br /> Easily customizable.
+					</Popup>
+				</Marker>
+			</Map>
+		);
+
+
+
+
+
+
+
+
+
+
+
+
+		// const position = [this.state.lat, this.state.lng];
+
+		// return (
+    //   <Map center={position} zoom={this.state.zoom}>
+    //     <TileLayer
+    //       attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    //       url="https://tile.openweathermap.org/map/temp_new/2/1/3.png?appid=4de58afe7c0aa78a01498b122c46d7e2"
+    //     />
+    //     <Marker position={position}>
+    //       <Popup>
+    //         A pretty CSS3 popup. <br /> Easily customizable.
+    //       </Popup>
+    //     </Marker>
+    //   </Map>
 
       // <div>
       //   {/* <!-- For the invisible map --> */}
@@ -78,6 +106,6 @@ export default class MapComponent extends Component {
       //   {/* <!-- To display the result --> */}
       //   <div id="result"></div>
       // </div>
-    );
+    // );
   }
 }

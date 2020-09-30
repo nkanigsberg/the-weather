@@ -19,7 +19,7 @@ import HourlyForecast from './Components/HourlyForecast';
 import LocationList from './Components/LocationList'
 import Footer from './Components/Footer';
 
-// import MapComponent from './Components/MapComponent';
+import MapComponent from './Components/MapComponent';
 
 
 class App extends Component {
@@ -32,9 +32,11 @@ class App extends Component {
       weather: {},
       city: "",
       province: "",
-      country: "",
+			country: "",
+			isLoading: false,
       weatherLoading: true,
-      locationLoading: true,
+			locationLoading: true,
+			firebaseLoading: true,
 			units: "metric",
 			locationList: [],
     };
@@ -50,12 +52,13 @@ class App extends Component {
 			const data = response.val();
 
 			for (let key in data) {
-				newState.push(data[key]);
+				newState.push({key: key, data: data[key]});
 			}
 
-			console.log(newState);
+			// console.log(newState);
 			this.setState({
 				locationList: newState,
+				firebaseLoading: false,
 			})
 		})
   }
@@ -88,38 +91,100 @@ class App extends Component {
   getCity(lat, lon) {
 		const dbRef = firebase.database().ref();
 		
+		this.setState({
+			isLoading: true,
+		})
+
 		reverseGeo(lat, lon).then(result => {
 			
 			const { city, state, country } = result.data.address;
 			
-			let allowPush = false;
+			// let allowPush = false;
 
 			// console.log(result.data.address);
-      this.setState({
-				city: city,
-				province: state,
-				country: country,
-				locationLoading: false,
-			})
-			// , () => {
+      this.setState(
+        {
+          city: city,
+          province: state,
+          country: country,
+          locationLoading: false,
+        },
+        this.updateList
+      );	
+			
+			// console.log(this.state.locationList);
 
-			// 	// check to see if location is already in list
-			// 	for (let loc in this.state.locationList) {
-			// 		console.log(loc);
-			// 		console.log(loc.city, loc.state, loc.country);
-			// 		console.log(city, state, country);
-			// 	}
+			// for (let loc in this.state.locationList) {
+      //   const list = this.state.locationList;
+      //   console.log(this.state.locationList[loc]);
+      //   // console.log(loc.data.city, loc.data.state, loc.data.country);
+      //   // console.log(city, state, country);
 
-			// 	// if not in list, push city to firebase
-			// 	dbRef.push({
-			// 		city: city,
-			// 		state: state,
-			// 		country: country,
-			// 		lat: lat,
-			// 		lon: lon,
-			// 	});
-			// })
+      //   if (
+      //     list[loc].data.city !== city &&
+      //     list[loc].data.state !== state &&
+      //     list[loc].data.country !== country
+      //   ) {
+      //     // if not in list, push city to firebase
+      //     dbRef.push({
+      //       city: city,
+      //       state: state,
+      //       country: country,
+      //       lat: lat,
+      //       lon: lon,
+      //     });
+      //   }
+      // }
+
+
+
 		})
+		
+	}
+
+	/**
+	 * Update the location list from state
+	 */
+	updateList() {
+		console.log(this.state.firebaseLoading);
+		if (!this.state.firebaseLoading) {
+      const dbRef = firebase.database().ref();
+      let canPush = true;
+      // console.log(this.state.locationList);
+
+      // check to see if location is already in list
+      for (let loc in this.state.locationList) {
+        const list = this.state.locationList;
+        // console.log(this.state.locationList[loc]);
+        // console.log(loc.data.city, loc.data.state, loc.data.country);
+        // console.log(city, state, country);
+        // console.log(list[loc]);
+        // console.log(
+        // 	list[loc].data.city, this.state.city,
+        // 		list[loc].data.state, this.state.province,
+        // 		list[loc].data.country, this.state.country
+        // );
+
+        if (
+          list[loc].data.city === this.state.city &&
+          list[loc].data.state === this.state.province &&
+          list[loc].data.country === this.state.country
+        ) {
+          canPush = false;
+        }
+      }
+
+      // if not in list, push city to firebase
+      if (canPush) {
+        dbRef.push({
+          city: this.state.city ? this.state.city : '',
+          state: this.state.province ? this.state.province : '',
+          country: this.state.country,
+          lat: this.state.lat,
+          lon: this.state.lon,
+        });
+      }
+    }
 	}
 
 	
@@ -194,17 +259,50 @@ class App extends Component {
 	}
 	
 
+	/**
+	 * Change location on selection from list
+	 * @param {*} data 
+	 */
+	selectLocation = (data) => {
+		console.log('select ', data);
+
+		this.getWeather(data.lat, data.lon, this.state.units);
+
+		this.setState({
+			city: data.city,
+			province: data.state,
+			country: data.country,
+			locationLoading: false,
+		})
+	}
+
+	/**
+	 * Remove location from list
+	 * @param {*} key 
+	 */
+	removeLocation = (key) => {
+		const dbRef = firebase.database().ref();
+		console.log('remove', key);
+
+		dbRef.child(key).remove();
+	}
+
+
+
 
   render() {
     // console.log('render');
     const {
       weather,
       weatherLoading,
-      locationLoading,
+			locationLoading,
+			isLoading,
       city,
       province,
       country,
-      units,
+			units,
+			lat,
+			lon
     } = this.state;
 
 
@@ -220,13 +318,10 @@ class App extends Component {
         <main>
           <div className="wrapper">
             <div class="main-container">
-
-							{/* <MapComponent /> */}
-
               <div class="main-left">
                 {/* display main content only after loaded from API */}
                 {weatherLoading || locationLoading ? (
-                  <p>Loading...</p>
+                  <p>{isLoading ? "Loading..." : ""}</p>
                 ) : (
                   <>
                     <CurrentWeather
@@ -245,9 +340,14 @@ class App extends Component {
               </div>
 
               <div className="main-right">
-								{/* <LocationList locations={this.state.locationList} /> */}
-							</div>
+                <LocationList
+                  onSelect={this.selectLocation}
+                  onRemove={this.removeLocation}
+                  locations={this.state.locationList}
+                />
 
+                <MapComponent />
+              </div>
             </div>
           </div>
         </main>
