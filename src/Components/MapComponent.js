@@ -1,111 +1,88 @@
+// import { ImageOverlay } from 'leaflet';
 import React, { Component } from 'react'
 
 import { render } from "react-dom";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { Map, TileLayer, LayersControl } from "react-leaflet";
 
 import '../styles/MapComponent.css'
 
-export default class MapComponent extends Component {
-	constructor() {
-		super();
-		
-		this.state = {
-      lat: 51.505,
-      lng: -0.09,
-      zoom: 13,
-    };
+// import Search from 'react-leaflet-search';
+
+export default function MapComponent(props) {
+
+	const { lat, lon, mapType, onChange } = props;
+	let zoom = 5;
+
+	const position = [lat, lon];
+
+	/**
+	 * Pass the value to parent component
+	 */
+	const passValue = e => {
+		// console.log(e.target.value);
+		onChange(e.target.value);
 	}
 
-  
-	
-
-	componentDidMount() {
-    // // Initialize an empty map without layers (invisible map)
-    // this.map = L.map("map", {
-    //   center: [40.7259, -73.9805], // Map loads with this location as center
-    //   zoom: 12,
-    //   scrollWheelZoom: true,
-    //   zoomControl: false,
-    //   attributionControl: false,
-		// });
-		
-		//   //Geocoder options
-    // this.geocoderControlOptions = {
-    //   bounds: false, //To not send viewbox
-    //   markers: false, //To not add markers when we geocoder
-    //   attribution: null, //No need of attribution since we are not using maps
-    //   expanded: true, //The geocoder search box will be initialized in expanded mode
-    //   panToPoint: false, //Since no maps, no need to pan the map to the geocoded-selected location
-    // };
-
-    // //Initialize the geocoder
-    // this.geocoderControl = new L.control.geocoder(
-    //   "a2f6bb0bb601e5",
-    //   geocoderControlOptions
-    // )
-    //   .addTo(map)
-    //   .on("select", function (e) {
-    //     displayLatLon(
-    //       e.feature.feature.display_name,
-    //       e.latlng.lat,
-    //       e.latlng.lng
-    //     );
-    //   });
-  }
 
 
-	render() {
+	return (
+    <div className="MapComponent">
+      <Map center={position} zoom={zoom}>
+        {/* <TileLayer
+							attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+							url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+						/> */}
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+        />
 
+        <TileLayer
+          url={`https://tile.openweathermap.org/map/${mapType}/{z}/{x}/{y}.png?appid=4de58afe7c0aa78a01498b122c46d7e2`}
+          /* bounds={[[lat - 10, lon - 10], [lat + 10, lon + 10]]} */
+          /* zIndex={2} */
+        />
 
-		const position = [this.state.lat, this.state.lng];
-		return (
-			<Map center={position} zoom={this.state.zoom}>
-				<TileLayer
-					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-				/>
-				<Marker position={position}>
-					<Popup>
-						A pretty CSS3 popup. <br /> Easily customizable.
-					</Popup>
-				</Marker>
-			</Map>
-		);
+        {/* <Marker position={position}>
+							<Popup>
+								A pretty CSS3 popup. <br /> Easily customizable.
+							</Popup>
+						</Marker> */}
+      </Map>
 
-
-
-
-
-
-
-
-
-
-
-
-		// const position = [this.state.lat, this.state.lng];
-
-		// return (
-    //   <Map center={position} zoom={this.state.zoom}>
-    //     <TileLayer
-    //       attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    //       url="https://tile.openweathermap.org/map/temp_new/2/1/3.png?appid=4de58afe7c0aa78a01498b122c46d7e2"
-    //     />
-    //     <Marker position={position}>
-    //       <Popup>
-    //         A pretty CSS3 popup. <br /> Easily customizable.
-    //       </Popup>
-    //     </Marker>
-    //   </Map>
-
-      // <div>
-      //   {/* <!-- For the invisible map --> */}
-      //   <div id="map"></div>
-      //   {/* <!-- For the search box --> */}
-      //   <div id="search-box"></div>
-      //   {/* <!-- To display the result --> */}
-      //   <div id="result"></div>
-      // </div>
-    // );
-  }
+      {/* map layer control */}
+      <form onChange={passValue} className="mapLayer" action="#">
+        <div className="mapLayer-control">
+          <input
+            type="radio"
+            name="mapLayerControl"
+            id="clouds_new"
+            value="clouds_new"
+            checked={mapType === "clouds_new" ? true : false}
+          />
+          <label htmlFor="clouds_new">Clouds</label>
+        </div>
+        <div className="mapLayer-control">
+          <input
+            type="radio"
+            name="mapLayerControl"
+            id="precipitation_new"
+            value="precipitation_new"
+            checked={mapType === "precipitation_new" ? true : false}
+          />
+          <label htmlFor="precipitation_new">Precipitation</label>
+        </div>
+        <div className="mapLayer-control">
+          <input
+            type="radio"
+            name="mapLayerControl"
+            id="temp_new"
+            value="temp_new"
+            checked={mapType === "temp_new" ? true : false}
+          />
+          <label htmlFor="temp_new">Temperature</label>
+        </div>
+      </form>
+    </div>
+  );
 }

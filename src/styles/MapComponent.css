@@ -24,3 +24,16 @@
 	.leaflet-locationiq-results{
 			padding-top: 45px;
 	}
+
+	.mapLayer {
+		display: flex;
+		justify-content: space-between;;
+	}
+
+	.mapLayer label {
+		padding-left: 1rem;
+	}
+
+	.mapLayer-control {
+		padding: 1rem;
+	}

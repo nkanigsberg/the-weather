@@ -8,6 +8,7 @@ import './styles/App.css';
 
 import openWeather from './API/openWeather';
 import { reverseGeo, forwardGeo } from './API/locationIq';
+// import ipdata from './API/ipdata';
 
 import WeatherIcon from './Components/WeatherIcon';
 // import SearchBar from './Components/SearchBar';
@@ -26,19 +27,20 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      lat: 0,
-      lon: 0,
+      lat: 43.6534,
+      lon: -79.3839,
       location: "",
       weather: {},
       city: "",
       province: "",
-			country: "",
-			isLoading: false,
+      country: "",
+      isLoading: false,
       weatherLoading: true,
-			locationLoading: true,
-			firebaseLoading: true,
-			units: "metric",
+      locationLoading: true,
+      firebaseLoading: true,
+      units: "metric",
 			locationList: [],
+			mapType: "clouds_new",
     };
   }
 
@@ -61,6 +63,13 @@ class App extends Component {
 				firebaseLoading: false,
 			})
 		})
+
+
+		// ipdata().then(response => {
+		// 	console.log(response);
+		// });
+		// console.log(ipdata());
+
   }
 
   // get location data for user's device
@@ -149,7 +158,8 @@ class App extends Component {
 		console.log(this.state.firebaseLoading);
 		if (!this.state.firebaseLoading) {
       const dbRef = firebase.database().ref();
-      let canPush = true;
+			let canPush = true;
+			
       // console.log(this.state.locationList);
 
       // check to see if location is already in list
@@ -175,7 +185,7 @@ class App extends Component {
       }
 
       // if not in list, push city to firebase
-      if (canPush) {
+      if (canPush && this.state.locationList.length < 6) {
         dbRef.push({
           city: this.state.city ? this.state.city : '',
           state: this.state.province ? this.state.province : '',
@@ -269,6 +279,8 @@ class App extends Component {
 		this.getWeather(data.lat, data.lon, this.state.units);
 
 		this.setState({
+			lat: data.lat,
+			lon: data.lon,
 			city: data.city,
 			province: data.state,
 			country: data.country,
@@ -288,6 +300,14 @@ class App extends Component {
 	}
 
 
+	updateMapType = value => {
+		// console.log('change', value);
+		this.setState({
+			mapType: value,
+		})
+	}
+
+
 
 
   render() {
@@ -302,7 +322,8 @@ class App extends Component {
       country,
 			units,
 			lat,
-			lon
+			lon,
+			mapType,
     } = this.state;
 
 
@@ -346,7 +367,13 @@ class App extends Component {
                   locations={this.state.locationList}
                 />
 
-                <MapComponent />
+								<MapComponent
+									lat={lat}
+									lon={lon}
+									mapType={mapType}
+									onChange={this.updateMapType}
+								/>
+								
               </div>
             </div>
           </div>
