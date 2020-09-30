@@ -41,6 +41,7 @@ class App extends Component {
       units: "metric",
 			locationList: [],
 			mapType: "clouds_new",
+			uid: '',
     };
   }
 
@@ -52,23 +53,60 @@ class App extends Component {
 		dbRef.on('value', response => {
 			const newState = [];
 			const data = response.val();
+			
+			// if there is data
+			if (data) {
+				const user = data.users[this.state.uid];
 
-			for (let key in data) {
-				newState.push({key: key, data: data[key]});
+				// console.log(data);
+
+				for (let key in user) {
+					newState.push({key: key, data: user[key]});
+				}
+
+				// console.log(newState);
+				this.setState({
+					locationList: newState,
+					firebaseLoading: false,
+				})
+			} else {
+				this.setState({
+          locationList: [],
+          firebaseLoading: false,
+        });
 			}
-
-			// console.log(newState);
-			this.setState({
-				locationList: newState,
-				firebaseLoading: false,
-			})
 		})
 
 
-		// ipdata().then(response => {
-		// 	console.log(response);
-		// });
-		// console.log(ipdata());
+		// firebase anonymous account auth
+		firebase
+			.auth()
+			.signInAnonymously()
+			.catch(function (error) {
+				// Handle Errors here.
+				console.log(error.code);
+				console.log(error.message);
+			
+			});
+
+			firebase.auth().onAuthStateChanged( (user) => {
+        if (user) {
+          // User is signed in.
+          const isAnonymous = user.isAnonymous;
+					const uid = user.uid;
+					console.log(uid);
+
+					this.setState({
+						uid: uid,
+					})
+          // ...
+        } else {
+					// User is signed out.
+					console.log('signed out');
+          // ...
+        }
+        // ...
+      });
 
   }
 
@@ -98,7 +136,7 @@ class App extends Component {
 
   // get city name from locationIQ API
   getCity(lat, lon) {
-		const dbRef = firebase.database().ref();
+		// const dbRef = firebase.database().ref();
 		
 		this.setState({
 			isLoading: true,
@@ -186,7 +224,8 @@ class App extends Component {
 
       // if not in list, push city to firebase
       if (canPush && this.state.locationList.length < 6) {
-        dbRef.push({
+				console.log('pushing');
+        dbRef.child('users').child(this.state.uid).push({
           city: this.state.city ? this.state.city : '',
           state: this.state.province ? this.state.province : '',
           country: this.state.country,
@@ -296,7 +335,7 @@ class App extends Component {
 		const dbRef = firebase.database().ref();
 		console.log('remove', key);
 
-		dbRef.child(key).remove();
+		dbRef.child('users').child(this.state.uid).child(key).remove();
 	}
 
 
