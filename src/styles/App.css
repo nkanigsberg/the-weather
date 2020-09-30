@@ -8,6 +8,10 @@ main {
 }
 
 
+.main-container {
+	display: flex;
+}
+
 
 
 /* .App {

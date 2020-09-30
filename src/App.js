@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import firebase from './firebase';
+
 import './styles/fonts.css';
 import './styles/App.css';
 
@@ -14,6 +16,7 @@ import Header from './Components/Header';
 import CurrentWeather from './Components/CurrentWeather';
 import WeekForecast from './Components/WeekForecast';
 import HourlyForecast from './Components/HourlyForecast';
+import LocationList from './Components/LocationList'
 import Footer from './Components/Footer';
 
 // import MapComponent from './Components/MapComponent';
@@ -32,12 +35,29 @@ class App extends Component {
       country: "",
       weatherLoading: true,
       locationLoading: true,
-      units: "metric",
+			units: "metric",
+			locationList: [],
     };
   }
 
   componentDidMount() {
 		this.getLocation();
+
+		const dbRef = firebase.database().ref();
+
+		dbRef.on('value', response => {
+			const newState = [];
+			const data = response.val();
+
+			for (let key in data) {
+				newState.push(data[key]);
+			}
+
+			console.log(newState);
+			this.setState({
+				locationList: newState,
+			})
+		})
   }
 
   // get location data for user's device
@@ -66,17 +86,43 @@ class App extends Component {
 
   // get city name from locationIQ API
   getCity(lat, lon) {
+		const dbRef = firebase.database().ref();
+		
 		reverseGeo(lat, lon).then(result => {
+			
+			const { city, state, country } = result.data.address;
+			
+			let allowPush = false;
+
 			// console.log(result.data.address);
       this.setState({
-				city: result.data.address.city,
-				province: result.data.address.state,
-				country: result.data.address.country,
+				city: city,
+				province: state,
+				country: country,
 				locationLoading: false,
-      });
-    });
-  }
+			})
+			// , () => {
 
+			// 	// check to see if location is already in list
+			// 	for (let loc in this.state.locationList) {
+			// 		console.log(loc);
+			// 		console.log(loc.city, loc.state, loc.country);
+			// 		console.log(city, state, country);
+			// 	}
+
+			// 	// if not in list, push city to firebase
+			// 	dbRef.push({
+			// 		city: city,
+			// 		state: state,
+			// 		country: country,
+			// 		lat: lat,
+			// 		lon: lon,
+			// 	});
+			// })
+		})
+	}
+
+	
 	// get weather from openWeather API
   getWeather(lat, lon, units) {
 
@@ -197,7 +243,11 @@ class App extends Component {
                   </>
                 )}
               </div>
-              <div className="main-right"></div>
+
+              <div className="main-right">
+								{/* <LocationList locations={this.state.locationList} /> */}
+							</div>
+
             </div>
           </div>
         </main>
