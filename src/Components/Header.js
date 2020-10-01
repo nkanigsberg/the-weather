@@ -8,11 +8,8 @@ import '../styles/Header.css'
 
 
 export default function Header(props) {
-	
 	const { getLocation, submit, change, updateUnits, units } = props;
 		
-	console.log('units', units);
-
 	return (
     <header>
       <div className="wrapper">

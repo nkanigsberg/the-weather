@@ -18,7 +18,6 @@ export default function LocationList(props) {
 		return loc.data.city === city && loc.data.state === state && loc.data.country === country ? true : false;
 	}
 
-
 	return (
 		<div className="LocationList">
 			<h3>Saved Locations</h3>

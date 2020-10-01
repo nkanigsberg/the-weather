@@ -7,9 +7,6 @@ export default function DateString(props) {
 	
 	const { time } = props;
 
-	// console.log(time);
-
-
 	let string = time;
 	const lastIndex = string.lastIndexOf(' ');
 

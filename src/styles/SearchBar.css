@@ -1,6 +1,5 @@
 
 .searchBar input {
-	/* font-size: 2rem; */
 	font-size: clamp(1.6rem, 0.8rem + 0.8vw, 2rem);
 
 	padding: 0.5rem 1.5rem;
@@ -19,7 +18,6 @@
 .searchBar button {
 	font-size: 2rem;
 
-	/* padding: 1rem; */
 	margin-left: 0.5rem;
 
 	background-color: #FFFFFF;

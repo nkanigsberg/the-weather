@@ -7,10 +7,8 @@
 	overflow: hidden;
 }
 
-
 .LocationList-remove {
 	padding: 0.5rem 0.5rem 0.5rem 1rem;
-
 }
 
 .LocationList-remove:hover,
@@ -23,24 +21,18 @@
 	color: black;
 }
 
-
 .LocationList h3 {
 	font-weight: bold;
 	letter-spacing: 0.05em;
 	text-align: center;
 
-
 	padding: 1.5rem;
 }
 
 .LocationList-loc {
-	/* border: 1px solid grey; */
-
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-
-	/* padding: 1rem; */
 }
 
 .LocationList p {
@@ -70,10 +62,6 @@
 .LocationList li {
 	width: 100%;
 }
-
-/* .LocationList-loc:nth-child(odd) {
-	background-color: #e9f3ff;
-} */
 
 .LocationList .selected {
 	background-color: #e9f3ff;

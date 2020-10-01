@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import '../styles/Units.css'
 
@@ -6,12 +6,9 @@ import '../styles/Units.css'
  * Select which units of measurement to use
  */
 export default function Units(props) {
-	
 	const { updateUnits, units } = props;
 
-	console.log('units', units);
-
-		return (
+	return (
       <div className="Units">
         <button
           className={units === "metric" ? "selected" : ""}

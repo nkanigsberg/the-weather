@@ -12,17 +12,6 @@ import '../styles/HourlyForecast.css'
 export default function HourlyForecast(props) {
 	const { hourly, units, page, scroll } = props;
 
-	// let minHour = 0;
-	// let maxHour = 12;
-
-	// const scrollRight = () => {
-	// 	console.log('scroll right');
-	// 	minHour = 12;
-	// 	maxHour = 24;
-	// }
-
-	console.log(page);
-
 	return (
     <div className="forecast-hourly-container">
       <h2>Hourly Forecast</h2>

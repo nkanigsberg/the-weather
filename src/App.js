@@ -6,24 +6,16 @@ import './styles/App.css';
 import './styles/media1280.css';
 import './styles/media768.css';
 
-// import axios from "axios";
-
 import openWeather from './API/openWeather';
 import { reverseGeo, forwardGeo } from './API/locationIq';
-// import ipdata from './API/ipdata';
-
-import WeatherIcon from './Components/WeatherIcon';
-// import SearchBar from './Components/SearchBar';
 
 import Header from './Components/Header';
 import CurrentWeather from './Components/CurrentWeather';
 import WeekForecast from './Components/WeekForecast';
 import HourlyForecast from './Components/HourlyForecast';
 import LocationList from './Components/LocationList'
-import Footer from './Components/Footer';
-
 import MapComponent from './Components/MapComponent';
-
+import Footer from './Components/Footer';
 
 class App extends Component {
   constructor() {
@@ -61,13 +53,10 @@ class App extends Component {
 			if (data) {
 				const user = data.users[this.state.uid];
 
-				// console.log(data);
-
 				for (let key in user) {
 					newState.push({key: key, data: user[key]});
 				}
 
-				// console.log(newState);
 				this.setState({
 					locationList: newState,
 					firebaseLoading: false,
@@ -79,7 +68,6 @@ class App extends Component {
         });
 			}
 		})
-
 
 		// firebase anonymous account auth
 		firebase
@@ -95,22 +83,16 @@ class App extends Component {
 			firebase.auth().onAuthStateChanged( (user) => {
         if (user) {
           // User is signed in.
-          const isAnonymous = user.isAnonymous;
 					const uid = user.uid;
-					console.log(uid);
 
 					this.setState({
 						uid: uid,
 					})
-          // ...
         } else {
 					// User is signed out.
 					console.log('signed out');
-          // ...
         }
-        // ...
       });
-
   }
 
   // get location data for user's device
@@ -119,7 +101,6 @@ class App extends Component {
 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        // console.log(position);
 
 				this.setState({
           lat: position.coords.latitude,
@@ -139,7 +120,6 @@ class App extends Component {
 
   // get city name from locationIQ API
   getCity(lat, lon) {
-		// const dbRef = firebase.database().ref();
 		
 		this.setState({
 			isLoading: true,
@@ -148,10 +128,7 @@ class App extends Component {
 		reverseGeo(lat, lon).then(result => {
 			
 			const { city, state, country } = result.data.address;
-			
-			// let allowPush = false;
-
-			// console.log(result.data.address);
+		
       this.setState(
         {
           city: city,
@@ -161,60 +138,20 @@ class App extends Component {
         },
         this.updateList
       );	
-			
-			// console.log(this.state.locationList);
-
-			// for (let loc in this.state.locationList) {
-      //   const list = this.state.locationList;
-      //   console.log(this.state.locationList[loc]);
-      //   // console.log(loc.data.city, loc.data.state, loc.data.country);
-      //   // console.log(city, state, country);
-
-      //   if (
-      //     list[loc].data.city !== city &&
-      //     list[loc].data.state !== state &&
-      //     list[loc].data.country !== country
-      //   ) {
-      //     // if not in list, push city to firebase
-      //     dbRef.push({
-      //       city: city,
-      //       state: state,
-      //       country: country,
-      //       lat: lat,
-      //       lon: lon,
-      //     });
-      //   }
-      // }
-
-
-
 		})
-		
 	}
 
 	/**
 	 * Update the location list from state
 	 */
 	updateList() {
-		console.log(this.state.firebaseLoading);
 		if (!this.state.firebaseLoading) {
       const dbRef = firebase.database().ref();
 			let canPush = true;
 			
-      // console.log(this.state.locationList);
-
       // check to see if location is already in list
       for (let loc in this.state.locationList) {
         const list = this.state.locationList;
-        // console.log(this.state.locationList[loc]);
-        // console.log(loc.data.city, loc.data.state, loc.data.country);
-        // console.log(city, state, country);
-        // console.log(list[loc]);
-        // console.log(
-        // 	list[loc].data.city, this.state.city,
-        // 		list[loc].data.state, this.state.province,
-        // 		list[loc].data.country, this.state.country
-        // );
 
         if (
           list[loc].data.city === this.state.city &&
@@ -227,7 +164,6 @@ class App extends Component {
 
       // if not in list, push city to firebase
       if (canPush && this.state.locationList.length < 6) {
-				console.log('pushing');
         dbRef.child('users').child(this.state.uid).push({
           city: this.state.city ? this.state.city : '',
           state: this.state.province ? this.state.province : '',
@@ -244,8 +180,7 @@ class App extends Component {
   getWeather(lat, lon, units) {
 
 		openWeather(lat, lon, units).then(result => {
-      // console.log(result.data);
-      // return result.data;
+
      	this.setState({
 				 weather: result.data,
 				 weatherLoading: false,
@@ -260,12 +195,10 @@ class App extends Component {
 	 */
 	searchLocation = e => {
 		e.preventDefault();
-		console.log("location search");
 
 		if (this.state.location) {
       forwardGeo(this.state.location).then((result) => {
         const location = result.data[0];
-				// console.log(location);
 				
 				this.setState({
 					lat: location.lat,
@@ -290,23 +223,9 @@ class App extends Component {
     });
 	}
 
-
-	// updateUnits = e => {
-	// 	// console.log(e.target.value);
-	// 	this.setState({
-	// 		units: e.target.value,
-	// 	}, () => { //callback function to guarantee execute AFTER state change
-	// 		const { lat, lon, units } = this.state;
-	// 		// console.log(units);
-
-	// 		this.getWeather(lat, lon, units);
-	// 	})
-	// }
-
 	updateUnits = e => {
 		const { lat, lon, units } = this.state;
-			// console.log(units);
-			// units: e.target.value,
+
 		this.getWeather(lat, lon, e.target.value);
 	}
 	
@@ -334,14 +253,12 @@ class App extends Component {
 	 */
 	removeLocation = (key) => {
 		const dbRef = firebase.database().ref();
-		console.log('remove', key);
 
 		dbRef.child('users').child(this.state.uid).child(key).remove();
 	}
 
 
 	updateMapType = value => {
-		// console.log('change', value);
 		this.setState({
 			mapType: value,
 		})
@@ -358,7 +275,6 @@ class App extends Component {
 
 
   render() {
-    // console.log('render');
     const {
       weather,
       weatherLoading,
@@ -374,7 +290,6 @@ class App extends Component {
 			hourlyPage,
     } = this.state;
 
-		console.log('units', units);
     return (
       <div className="App">
         <Header

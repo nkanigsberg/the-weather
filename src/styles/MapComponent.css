@@ -7,8 +7,6 @@
 			width: calc(10rem + 20vw);
 			height: 30rem;
 			background-color:transparent;
-
-			/* display: none; */
 	}
 
 	.mapLayer {
@@ -46,7 +44,6 @@
 	}
 
 	.mapLayer input:checked + label {
-		/* background-color: #b7d6f3; */
 		border: 2px solid #5f92cc;
 	}
 

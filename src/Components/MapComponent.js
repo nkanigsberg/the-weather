@@ -1,15 +1,13 @@
 // import { ImageOverlay } from 'leaflet';
 import React, { Component } from 'react'
 
-import { render } from "react-dom";
-import { Map, TileLayer, LayersControl } from "react-leaflet";
+import { Map, TileLayer } from "react-leaflet";
 
 import '../styles/MapComponent.css'
 
 // import Search from 'react-leaflet-search';
 
 export default function MapComponent(props) {
-
 	const { lat, lon, mapType, onChange } = props;
 	let zoom = 5;
 
@@ -19,15 +17,12 @@ export default function MapComponent(props) {
 	 * Pass the value to parent component
 	 */
 	const passValue = e => {
-		// console.log(e.target.value);
 		onChange(e.target.value);
 	}
 
-
-
 	return (
     <div className="MapComponent">
-			
+
       {/* map layer control */}
       <form onChange={passValue} className="mapLayer" action="#">
         <div className="mapLayer-control">
@@ -63,10 +58,6 @@ export default function MapComponent(props) {
       </form>
 
       <Map center={position} zoom={zoom}>
-        {/* <TileLayer
-							attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-							url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-						/> */}
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
@@ -74,15 +65,7 @@ export default function MapComponent(props) {
 
         <TileLayer
           url={`https://tile.openweathermap.org/map/${mapType}/{z}/{x}/{y}.png?appid=4de58afe7c0aa78a01498b122c46d7e2`}
-          /* bounds={[[lat - 10, lon - 10], [lat + 10, lon + 10]]} */
-          /* zIndex={2} */
         />
-
-        {/* <Marker position={position}>
-							<Popup>
-								A pretty CSS3 popup. <br /> Easily customizable.
-							</Popup>
-						</Marker> */}
       </Map>
     </div>
   );

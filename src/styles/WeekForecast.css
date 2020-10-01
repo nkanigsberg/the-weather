@@ -15,12 +15,9 @@
 }
 
 .forecast-day {
-	/* display: flex; */
 	text-align: center;
 
 	padding: 1rem;
-
-	/* width: calc(100% / 7); */
 }
 
 .forecast-date {
