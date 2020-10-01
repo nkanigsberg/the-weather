@@ -1,0 +1,51 @@
+@media (max-width: 768px) {
+	
+	header .header-container {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: nowrap;
+
+		height: 20rem;
+	}
+
+	header .header-right {
+		position: static;
+		height: 40%;
+
+		flex-direction: column-reverse;
+	}
+
+	.header-right .Units {
+		position: static;
+	}
+
+	header h1 {
+		height: 45%;
+	}
+
+	main .forecast-week {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	main .forecast-hourly {
+		grid-template-columns: repeat(7, 1fr);
+	}
+
+	.main-right {
+		flex-direction: column;
+	}
+
+	.LocationList {
+		width: 100%;
+	}
+
+	.main-right .MapComponent {
+		width: 100%;
+	}
+
+	.main-right .leaflet-container {
+		width: 100%;
+	}
+
+}

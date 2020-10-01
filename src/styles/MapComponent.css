@@ -4,7 +4,7 @@
 	}
 	
 	.leaflet-container {
-			width: 40rem;
+			width: calc(10rem + 20vw);
 			height: 30rem;
 			background-color:transparent;
 
@@ -13,7 +13,8 @@
 
 	.mapLayer {
 		display: flex;
-		justify-content: space-between;;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
 	}
 
 	.mapLayer label {
@@ -21,7 +22,7 @@
 	}
 
 	.mapLayer-control {
-		padding: 1rem 0;
+		padding: 0.3rem 0;
 	}
 
 	.mapLayer input {

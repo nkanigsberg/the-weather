@@ -3,6 +3,8 @@ import firebase from './firebase';
 
 import './styles/fonts.css';
 import './styles/App.css';
+import './styles/media1280.css';
+import './styles/media768.css';
 
 // import axios from "axios";
 
@@ -392,13 +394,13 @@ class App extends Component {
                   <p>{isLoading ? "Loading..." : ""}</p>
                 ) : (
                   <>
-                    <CurrentWeather
-                      city={city}
-                      province={province}
-                      country={country}
-                      weather={weather}
-                      units={units}
-                    />
+										<CurrentWeather
+											city={city}
+											province={province}
+											country={country}
+											weather={weather}
+											units={units}
+										/>
 
                     <WeekForecast daily={weather.daily} units={units} />
 

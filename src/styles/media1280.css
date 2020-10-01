@@ -1,0 +1,25 @@
+@media (max-width: 1280px) {
+	.main-container {
+		flex-direction: column;
+	}
+
+	.main-left {
+		padding-right: 0;
+	}
+
+	.main-right {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: space-evenly;
+		align-items: start;
+	}
+
+	.main-right .MapComponent {
+		padding-top: 0;
+		width: 40vw;
+	}
+
+	.main-right .leaflet-container {
+		width: 40vw;
+	}
+}

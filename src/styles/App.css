@@ -10,11 +10,22 @@ main {
 
 .main-container {
 	display: flex;
+	justify-content: space-between;
+
+	width: 100%;
+}
+
+.main-top {
+	display: flex;
 }
 
 .main-left {
 	padding-right: 3rem;
 }
+
+/* .main-right {
+	justify-self: flex-end;
+} */
 
 h2 {
 	font-weight: bold
