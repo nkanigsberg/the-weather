@@ -1,5 +1,5 @@
 header {
-	background-color: #bed6ec;
+	background-color: #b7d6f3;
 }
 
 .header-container {
@@ -8,15 +8,33 @@ header {
 	justify-content: space-between;
 	align-items: center;
 
-	padding: 3rem 0;
+	/* padding: 3rem 0; */
+
+	height: 16rem;
 }
 
 .header-right {
 	display: flex;
+	align-items: center;
+
+	position: relative;
+
+	height: 100%;
 }
 
 h1 {
 	font-size: 4rem;
+	font-weight: bold;
+
+}
+
+h1 span {
+	font-weight: normal;
+}
+
+h1 a {
+	display: flex;
+	align-items: center;
 }
 
 .searchBar {

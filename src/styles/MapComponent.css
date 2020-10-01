@@ -1,28 +1,14 @@
 
-/* leaflet */
-	body {
-			margin: 0;
+	.MapComponent {
+		padding-top: 2rem;
 	}
+	
 	.leaflet-container {
 			width: 40rem;
 			height: 30rem;
 			background-color:transparent;
+
 			/* display: none; */
-	}
-	#search-box {
-			padding-left: 20px;
-			padding-top: 20px;
-			width: 800px;
-			height: 100px;
-	}
-	#result {
-			padding-left: 20px;
-			padding-top: 20px;
-			width: 800px;
-			height: 100px;
-	}
-	.leaflet-locationiq-results{
-			padding-top: 45px;
 	}
 
 	.mapLayer {
@@ -35,5 +21,40 @@
 	}
 
 	.mapLayer-control {
-		padding: 1rem;
+		padding: 1rem 0;
+	}
+
+	.mapLayer input {
+		position: absolute;
+		opacity: 0;
+	}
+
+	.mapLayer label {
+		text-align: center;
+
+		display: inline-block;
+		width: 11.5rem;
+
+		cursor: pointer;
+
+		padding: 0.5rem 1rem;
+
+		background-color: #e9f3ff;
+		border: 2px solid #e9f3ff;
+		border-radius: 1.5rem;
+	}
+
+	.mapLayer input:checked + label {
+		/* background-color: #b7d6f3; */
+		border: 2px solid #5f92cc;
+	}
+
+	.mapLayer label:hover,
+	.mapLayer input:focus + label {
+		background-color: #5f92cc;
+		color: white;
+	}
+
+	.mapLayer input:active + label {
+		color: black;
 	}

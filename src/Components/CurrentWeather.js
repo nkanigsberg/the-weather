@@ -2,8 +2,7 @@ import React from 'react';
 
 import WeatherIcon from './WeatherIcon';
 import Temperature from './Temperature';
-import HourString from './HourString'
-import DateString from './DateString'
+import TimeString from './TimeString'
 import Location from './Location'
 
 import '../styles/CurrentWeather.css';
@@ -21,26 +20,38 @@ export default function CurrentWeather(props) {
 	return (
     <div className="currentWeather-container">
       <h2>
-        <Location
-					city={city}
-					province={province}
-					country={country}
-				/>
+        <Location city={city} province={province} country={country} />
       </h2>
       <p>{time.toDateString()}</p>
 
       <div className="currentWeather">
-        <p className="description">{weather.current.weather[0].description}</p>
+        <div class="currentWeather-left">
+          <p>Humidity: {weather.current.humidity}%</p>
+          <p>
+            Sunrise:{" "}
+            <TimeString time={new Date(weather.current.sunrise * 1000)} />
+          </p>
+          <p>
+            Sunset:{" "}
+            <TimeString time={new Date(weather.current.sunset * 1000)} />
+          </p>
+        </div>
 
-        <WeatherIcon
-          type={weather.current.weather[0].icon}
-          description={weather.current.weather[0].description}
-        />
+        <div className="currentWeather-middle">
+          <p className="description">
+            {weather.current.weather[0].description}
+          </p>
+
+          <WeatherIcon
+            type={weather.current.weather[0].icon}
+            description={weather.current.weather[0].description}
+          />
+        </div>
 
         <div className="currentWeather-right">
-          <h3>
+          <p className="currentWeather-temp">
             <Temperature temp={weather.current.temp} units={units} />
-          </h3>
+          </p>
 
           <p>
             Feels like:{" "}

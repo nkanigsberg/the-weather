@@ -1,47 +1,42 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import SearchBar from './SearchBar'
 import Units from './Units'
+import WeatherIcon from './WeatherIcon'
 
 import '../styles/Header.css'
 
-// import App from '../App';
 
-export default class Header extends Component {
-	constructor(props) {
-		super();
-		this.getLocation = props.getLocation;
-		this.submit = props.submit;
-		this.change = props.change;
-		this.updateUnits = props.updateUnits;
-
-		// console.log(props);
-		// console.log(this.change);
-
-		console.log(this.updateUnits);
-	}
+export default function Header(props) {
 	
-	render() {
-		return (
-      <header>
-        <div className="wrapper">
-					<div className="header-container">
-						<h1>Weather App</h1>
-						
-						<div className="header-right">
-							<Units updateUnits={this.updateUnits} />
-							
-							<SearchBar
-								getLocation={this.getLocation}
-								submit={this.submit}
-								change={this.change}
-								id="search-location"
-								placeholder="Enter Location"
-							/>
-						</div>
-					</div>
-				</div>
-      </header>
-    );
-	}
+	const { getLocation, submit, change, updateUnits, units } = props;
+		
+	console.log('units', units);
+
+	return (
+    <header>
+      <div className="wrapper">
+        <div className="header-container">
+          <h1>
+            <a href="#">
+              <WeatherIcon type="02d" description="TheWeather Logo" />
+              <span>The</span>Weather
+            </a>
+          </h1>
+
+          <div className="header-right">
+            <Units updateUnits={updateUnits} units={units} />
+
+            <SearchBar
+              getLocation={getLocation}
+              submit={submit}
+              change={change}
+              id="search-location"
+              placeholder="Enter Location"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 }

@@ -42,6 +42,7 @@ class App extends Component {
 			locationList: [],
 			mapType: "clouds_new",
 			uid: '',
+			hourlyPage: 0,
     };
   }
 
@@ -313,8 +314,6 @@ class App extends Component {
 	 * @param {*} data 
 	 */
 	selectLocation = (data) => {
-		console.log('select ', data);
-
 		this.getWeather(data.lat, data.lon, this.state.units);
 
 		this.setState({
@@ -346,6 +345,13 @@ class App extends Component {
 		})
 	}
 
+	hourlyScroll = page => {
+		
+		if (page >=0 && page <= 1) {
+			this.setState({
+			hourlyPage: page,
+		})}
+	}
 
 
 
@@ -363,16 +369,18 @@ class App extends Component {
 			lat,
 			lon,
 			mapType,
+			hourlyPage,
     } = this.state;
 
-
+		console.log('units', units);
     return (
       <div className="App">
         <Header
           getLocation={this.getLocation}
           submit={this.searchLocation}
           change={this.updateLocationState}
-          updateUnits={this.updateUnits}
+					updateUnits={this.updateUnits}
+					units={units}
         />
 
         <main>
@@ -394,7 +402,7 @@ class App extends Component {
 
                     <WeekForecast daily={weather.daily} units={units} />
 
-                    <HourlyForecast hourly={weather.hourly} units={units} />
+                    <HourlyForecast hourly={weather.hourly} units={units} page={hourlyPage} scroll={this.hourlyScroll} />
                   </>
                 )}
               </div>
@@ -403,7 +411,10 @@ class App extends Component {
                 <LocationList
                   onSelect={this.selectLocation}
                   onRemove={this.removeLocation}
-                  locations={this.state.locationList}
+									locations={this.state.locationList}
+									city={city}
+									state={province}
+									country={country}
                 />
 
 								<MapComponent

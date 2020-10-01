@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import WeatherIcon from './WeatherIcon'
 import Temperature from './Temperature'
@@ -19,11 +19,9 @@ export default function WeekForecast(props) {
 					if (index > 0) {
 						const time = new Date(day.dt * 1000); // in milliseconds so multiply by 1000 to get seconds
 
-						// console.log(time.toDateString());
-
 						return (
               <div className="forecast-day">
-                <p>
+                <p className="forecast-date">
                   <DateString time={time.toDateString()} />
                 </p>
 
@@ -32,7 +30,7 @@ export default function WeekForecast(props) {
                   description={day.weather[0].description}
                 />
 
-                <p>{day.weather[0].description}</p>
+                <p className="description">{day.weather[0].description}</p>
 
                 <p>
                   <Temperature temp={day.temp.max} units={''} /> / <Temperature temp={day.temp.min} units={units} />

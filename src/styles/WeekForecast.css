@@ -2,12 +2,16 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	padding-top: 1rem;
 }
 
 .forecast-week {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: 1fr;
 
-	padding-top: 1rem;
+	padding: 1rem 0;
 }
 
 .forecast-day {
@@ -16,5 +20,15 @@
 
 	padding: 1rem;
 
-	width: calc(100% / 7);
+	/* width: calc(100% / 7); */
+}
+
+.forecast-date {
+	font-size: 1.8rem;
+}
+
+.forecast-day .description {
+	font-size: 1.6rem;
+	text-transform: capitalize;
+	padding-bottom: 0.5rem;
 }

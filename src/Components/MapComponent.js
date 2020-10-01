@@ -27,29 +27,7 @@ export default function MapComponent(props) {
 
 	return (
     <div className="MapComponent">
-      <Map center={position} zoom={zoom}>
-        {/* <TileLayer
-							attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-							url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-						/> */}
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-        />
-
-        <TileLayer
-          url={`https://tile.openweathermap.org/map/${mapType}/{z}/{x}/{y}.png?appid=4de58afe7c0aa78a01498b122c46d7e2`}
-          /* bounds={[[lat - 10, lon - 10], [lat + 10, lon + 10]]} */
-          /* zIndex={2} */
-        />
-
-        {/* <Marker position={position}>
-							<Popup>
-								A pretty CSS3 popup. <br /> Easily customizable.
-							</Popup>
-						</Marker> */}
-      </Map>
-
+			
       {/* map layer control */}
       <form onChange={passValue} className="mapLayer" action="#">
         <div className="mapLayer-control">
@@ -83,6 +61,29 @@ export default function MapComponent(props) {
           <label htmlFor="temp_new">Temperature</label>
         </div>
       </form>
+
+      <Map center={position} zoom={zoom}>
+        {/* <TileLayer
+							attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+							url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+						/> */}
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+        />
+
+        <TileLayer
+          url={`https://tile.openweathermap.org/map/${mapType}/{z}/{x}/{y}.png?appid=4de58afe7c0aa78a01498b122c46d7e2`}
+          /* bounds={[[lat - 10, lon - 10], [lat + 10, lon + 10]]} */
+          /* zIndex={2} */
+        />
+
+        {/* <Marker position={position}>
+							<Popup>
+								A pretty CSS3 popup. <br /> Easily customizable.
+							</Popup>
+						</Marker> */}
+      </Map>
     </div>
   );
 }

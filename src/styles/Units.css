@@ -1,0 +1,29 @@
+.Units {
+	display: flex;
+	align-items: center;
+
+	position: absolute;
+	top: 2rem;
+	right: 0;
+}
+
+/* .Units span {
+	padding: 0 0.3rem;
+} */
+
+.Units .selected {
+	font-weight: bold;
+}
+
+.Units button {
+	padding: 0.5rem 0.4rem;
+}
+
+.Units button:hover,
+.Units button:focus {
+	text-decoration: underline;
+}
+
+.Units button:active {
+	font-weight: bold;
+}

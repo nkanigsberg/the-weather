@@ -13,7 +13,7 @@ export default function SearchBar(props) {
 
 	return (
     <form action="submit" className="searchBar">
-      <label htmlFor={props.id}>Search Location </label>
+      <label className="sr-only" htmlFor={props.id}>Search Location</label>
       <input
         onChange={props.change}
         type="text"

@@ -1,19 +1,41 @@
 import React, { Component } from 'react'
 
+import '../styles/Units.css'
+
 /**
  * Select which units of measurement to use
  */
-export default class Units extends Component {
-	constructor(props) {
-		super();
-		this.updateUnits = props.updateUnits;
-	}
+export default function Units(props) {
+	
+	const { updateUnits, units } = props;
 
-	render() {
+	console.log('units', units);
+
 		return (
-			<div>
-				<button value="metric" onClick={this.updateUnits}>metric</button> / <button value="imperial" onClick={this.updateUnits}>imperial</button> / <button value="kelvin" onClick={this.updateUnits}>kelvin</button>
-			</div>
-		)
-	}
+      <div className="Units">
+        <button
+          className={units === "metric" ? "selected" : ""}
+          value="metric"
+          onClick={updateUnits}
+        >
+          metric
+        </button>
+        <span>/</span>
+        <button
+          className={units === "imperial" ? "selected" : ""}
+          value="imperial"
+          onClick={updateUnits}
+        >
+          imperial
+        </button>
+        <span>/</span>
+        <button
+          className={units === "kelvin" ? "selected" : ""}
+          value="kelvin"
+          onClick={updateUnits}
+        >
+          kelvin
+        </button>
+      </div>
+    );
 }

@@ -3,15 +3,15 @@
 	flex-direction: column;
 	align-items: center;
 
-	padding: 3rem 0;
+	padding: 4rem 0;
 	margin: 0 auto;
 
-	max-width: 70%;
+	/* max-width: 70%; */
 }
 
 .forecast-hourly {
 	display: grid;
-	grid-template-columns: repeat(12, 1fr);
+	grid-template-columns: repeat(14, minmax(5.5rem, 1fr));
 	grid-template-rows: 1fr;
 
 	padding-top: 1rem;
@@ -20,4 +20,22 @@
 .forecast-hour {
 	padding: 0.5rem;
 	text-align: center;
+}
+
+.forecast-hourly button {
+	padding: 1rem;
+}
+
+.forecast-hourly button.disabled {
+	opacity: 20%;
+}
+
+.forecast-hourly button:not(.disabled):hover,
+.forecast-hourly button:not(.disabled):focus {
+	background-color: #5f92cc;
+	color: white;
+}
+
+.forecast-hourly button:not(.disabled):active {
+	color: black;
 }

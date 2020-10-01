@@ -3,9 +3,22 @@ footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+
 }
 
 .footer-container {
-	padding: 2rem 0;
+	padding: 2.4rem 0;
 	color: white;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+footer a {
+	text-decoration: underline;
+}
+
+footer a:hover,
+footer a:focus {
+	opacity: 50%;
 }

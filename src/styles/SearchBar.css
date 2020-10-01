@@ -1,15 +1,41 @@
 
 .searchBar input {
 	font-size: 2rem;
+
+	padding: 0.5rem 1.5rem;
+
+	border: none;
+	border-radius: 1rem;
+
+	height: 3.5rem;
+
+}
+
+.searchBar input:focus {
+	box-shadow: 0 0 5px #FFFFFF;
 }
 
 .searchBar button {
 	font-size: 2rem;
 
-	padding: 0.5rem;
+	/* padding: 1rem; */
+	margin-left: 0.5rem;
+
+	background-color: #FFFFFF;
+	border-radius: 1rem;
+
+	width: 3.5rem;
+	height: 3.5rem;
 }
 
 .searchBar button:hover,
 .searchBar button:focus {
+	background-color: #3d7ac0;
+	border-radius: 1rem;
 
+	color: white;
+}
+
+.searchBar button:active {
+	color: black;
 }

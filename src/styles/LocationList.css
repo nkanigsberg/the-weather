@@ -1,18 +1,36 @@
 .LocationList {
-	border: 1px solid black;
+	border: 3px solid #b7d6f3;
+	border-radius: 2rem;
 
 	margin-bottom: 2rem;
+
+	overflow: hidden;
 }
 
 
 .LocationList-remove {
 	padding: 0.5rem 0.5rem 0.5rem 1rem;
+
+}
+
+.LocationList-remove:hover,
+.LocationList-remove:focus {
+	background-color: #e93232;
+	color: white;
+}
+
+.LocationList-remove:active {
+	color: black;
 }
 
 
 .LocationList h3 {
+	font-weight: bold;
+	letter-spacing: 0.05em;
 	text-align: center;
-	padding: 1rem;
+
+
+	padding: 1.5rem;
 }
 
 .LocationList-loc {
@@ -22,7 +40,7 @@
 	align-items: center;
 	justify-content: space-between;
 
-	padding: 1rem;
+	/* padding: 1rem; */
 }
 
 .LocationList p {
@@ -31,9 +49,32 @@
 }
 
 .LocationList-loc button {
-	text-align: left;
+	padding: 2rem;
 }
 
-.LocationList-loc:nth-child(odd) {
+.LocationList-select {
+	text-align: left;
+	width: 100%;
+}
+
+.LocationList-select:hover,
+.LocationList-select:focus {
+	background-color: #5f92cc;
+	color: white;
+}
+
+.LocationList-select:active {
+	color: black;
+}
+
+.LocationList li {
+	width: 100%;
+}
+
+/* .LocationList-loc:nth-child(odd) {
+	background-color: #e9f3ff;
+} */
+
+.LocationList .selected {
 	background-color: #e9f3ff;
 }

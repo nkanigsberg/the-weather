@@ -4,18 +4,51 @@
 	align-items: center;
 }
 
-.currentWeather {
-	display: flex;
-	justify-content: center;
-
-	padding: 3rem 0;
+.currentWeather-container h2 {
+	padding-bottom: 0.2rem;	
 }
+
+
+.currentWeather {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+
+	align-items: center;
+
+	padding: 1rem 0 3rem;
+}
+
+.currentWeather p {
+	font-size: 1.8rem;
+	padding: 0.2rem 0;
+}
+
+.currentWeather .currentWeather-temp {
+	font-size: 2.8rem;
+}
+
 
 .currentWeather-right {
 	display: flex;
 	flex-direction: column;
+
+	padding-left: 1rem;
 }
 
-.description {
+.currentWeather-middle {
+	display: flex;
+	flex-direction: column;
+
+	justify-content: center;
+	align-items: center;
+}
+
+.currentWeather-left .description {
+	/* padding-bottom: 2rem; */
+}
+
+.currentWeather .description {
 	text-transform: capitalize;
+	font-size: 1.6rem;
 }
