@@ -3,4 +3,4 @@
 link: https://nkanigsberg.github.io/nathanKanigsbergProject5/
 <br>
 
-![Game screenshot](screenshot.png?raw=true "Game screenshot")
+![Game screenshot](image.png?raw=true "Game screenshot")
