@@ -1,7 +1,7 @@
 {
   "homepage": "https://nkanigsberg.github.io/TheWeather/",
-  "name": "weather-app",
-  "version": "0.1.0",
+  "name": "the-weather",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
