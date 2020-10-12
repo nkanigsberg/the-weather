@@ -1,4 +1,4 @@
-<strong>Weather App created with React and Firebase</strong> <br>
+<strong>Weather app built using React, several REST APIs, and Firebase with anonymous authentication</strong> <br>
 
 link: https://nkanigsberg.github.io/TheWeather
 <br>
