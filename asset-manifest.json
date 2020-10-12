@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/nathanKanigsbergProject5/static/css/main.79189e8f.chunk.css",
-    "main.js": "/nathanKanigsbergProject5/static/js/main.9004fc7f.chunk.js",
-    "main.js.map": "/nathanKanigsbergProject5/static/js/main.9004fc7f.chunk.js.map",
-    "runtime-main.js": "/nathanKanigsbergProject5/static/js/runtime-main.ff34a727.js",
-    "runtime-main.js.map": "/nathanKanigsbergProject5/static/js/runtime-main.ff34a727.js.map",
-    "static/js/2.89f25fcb.chunk.js": "/nathanKanigsbergProject5/static/js/2.89f25fcb.chunk.js",
-    "static/js/2.89f25fcb.chunk.js.map": "/nathanKanigsbergProject5/static/js/2.89f25fcb.chunk.js.map",
-    "index.html": "/nathanKanigsbergProject5/index.html",
-    "precache-manifest.3352b4fe007c5020bc2bfcaa62654a2f.js": "/nathanKanigsbergProject5/precache-manifest.3352b4fe007c5020bc2bfcaa62654a2f.js",
-    "service-worker.js": "/nathanKanigsbergProject5/service-worker.js",
-    "static/css/main.79189e8f.chunk.css.map": "/nathanKanigsbergProject5/static/css/main.79189e8f.chunk.css.map",
-    "static/js/2.89f25fcb.chunk.js.LICENSE.txt": "/nathanKanigsbergProject5/static/js/2.89f25fcb.chunk.js.LICENSE.txt"
+    "main.css": "/TheWeather/static/css/main.0b215a2a.chunk.css",
+    "main.js": "/TheWeather/static/js/main.fab43f30.chunk.js",
+    "main.js.map": "/TheWeather/static/js/main.fab43f30.chunk.js.map",
+    "runtime-main.js": "/TheWeather/static/js/runtime-main.cfe0a734.js",
+    "runtime-main.js.map": "/TheWeather/static/js/runtime-main.cfe0a734.js.map",
+    "static/js/2.ca634a7b.chunk.js": "/TheWeather/static/js/2.ca634a7b.chunk.js",
+    "static/js/2.ca634a7b.chunk.js.map": "/TheWeather/static/js/2.ca634a7b.chunk.js.map",
+    "index.html": "/TheWeather/index.html",
+    "precache-manifest.46353034940e686775860e9de371d9b8.js": "/TheWeather/precache-manifest.46353034940e686775860e9de371d9b8.js",
+    "service-worker.js": "/TheWeather/service-worker.js",
+    "static/css/main.0b215a2a.chunk.css.map": "/TheWeather/static/css/main.0b215a2a.chunk.css.map",
+    "static/js/2.ca634a7b.chunk.js.LICENSE.txt": "/TheWeather/static/js/2.ca634a7b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.ff34a727.js",
-    "static/js/2.89f25fcb.chunk.js",
-    "static/css/main.79189e8f.chunk.css",
-    "static/js/main.9004fc7f.chunk.js"
+    "static/js/runtime-main.cfe0a734.js",
+    "static/js/2.ca634a7b.chunk.js",
+    "static/css/main.0b215a2a.chunk.css",
+    "static/js/main.fab43f30.chunk.js"
   ]
 }
