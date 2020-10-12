@@ -1,6 +1,6 @@
-<strong>Weather app built using React, several REST APIs, and Firebase with anonymous authentication</strong> <br>
-
-link: https://nkanigsberg.github.io/TheWeather
-<br>
-
-![Game screenshot](image.png?raw=true "Game screenshot")
+# TheWeather
+Weather app built using React, several REST APIs, and Firebase with anonymous authentication
+<br><br>
+Link: https://nkanigsberg.github.io/TheWeather
+<br><br>
+![TheWeather Screenshot](image.png?raw=true "TheWeather Screenshot")
