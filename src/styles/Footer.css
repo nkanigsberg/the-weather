@@ -20,5 +20,5 @@ footer a {
 
 footer a:hover,
 footer a:focus {
-	opacity: 50%;
+	opacity: 0.5;
 }

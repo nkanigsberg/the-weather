@@ -25,7 +25,7 @@
 }
 
 .forecast-hourly button.disabled {
-	opacity: 20%;
+	opacity: 0.2;
 }
 
 .forecast-hourly button:not(.disabled):hover,
